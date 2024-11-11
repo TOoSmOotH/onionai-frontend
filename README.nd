@@ -1,0 +1,92 @@
+# AI Chat Platform - Frontend Service
+
+## Overview
+Frontend service for the AI Chat Platform built with Streamlit. Provides a real-time chat interface with authentication, rate limiting, and session management.
+
+## Features
+- Real-time chat interface with AI
+- AWS Cognito authentication integration
+- Session management with chat history
+- Rate limiting (10 questions/hour for anonymous users, 50 questions/hour for authenticated users)
+- Previous chat session access for authenticated users
+- Responsive design with dark/light mode support
+
+## Prerequisites
+- Python 3.10+
+- AWS Account with configured credentials
+- Docker (optional)
+
+## Local Development Setup
+1. Clone the repository:
+```bash
+git clone https://github.com/ai-chat-platform/frontend-chat.git
+cd frontend-chat
+```
+
+2. Create and activate virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # Unix/macOS
+# or
+.\venv\Scripts\activate  # Windows
+```
+
+3. Install dependencies:
+```bash
+pip install -e ".[dev]"
+```
+
+4. Copy .env.example to .env and fill in your values:
+```bash
+cp .env.example .env
+```
+
+5. Run the development server:
+```bash
+streamlit run src/main.py
+```
+
+## Docker Deployment
+1. Build the container:
+```bash
+docker build -t ai-chat-frontend .
+```
+
+2. Run the container:
+```bash
+docker run -p 8501:8501 --env-file .env ai-chat-frontend
+```
+
+## Environment Variables
+```
+AWS_REGION=us-west-2
+COGNITO_USER_POOL_ID=us-west-2_xxxxxx
+COGNITO_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxx
+API_URL=https://api.example.com
+STREAMLIT_SERVER_MAX_UPLOAD_SIZE=5
+```
+
+## Project Structure
+```
+src/
+├── main.py                 # Application entry point
+├── components/            # UI components
+├── services/             # External service integrations
+└── utils/               # Utility functions
+```
+
+## Testing
+Run the test suite:
+```bash
+pytest
+```
+
+## Contributing
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/new-feature`
+3. Commit your changes: `git commit -am 'Add new feature'`
+4. Push to the branch: `git push origin feature/new-feature`
+5. Submit a pull request
+
+## License
+MIT
